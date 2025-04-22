@@ -1,5 +1,5 @@
-const { PrismaClient } = require("@prisma/client");
-const { faker } = require("@faker-js/faker");
+import { PrismaClient } from "./output";
+import { faker } from "@faker-js/faker";
 
 const prisma = new PrismaClient();
 
@@ -78,6 +78,7 @@ const taskBank: Record<Role, string[]> = {
     ],
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const users = [
     { id: "U1", name: "Alice", email: "alice@taskle.io", password: "alice123", role: "Product Manager" },
     { id: "U2", name: "Bob", email: "bob@taskle.io", password: "bob123", role: "Frontend Developer" },
@@ -96,10 +97,35 @@ function getRandomElement<T>(arr: T[]): T {
 }
 
 async function main() {
+
+    /**
+        if (
+            process.env.NODE_ENV !== "development" &&
+            process.env.NODE_ENV !== "test"
+        ) throw new Error("Must run in development or testing!")
+    
+        if ((await prisma.user.count()) > 3) {
+            throw new Error("Workspace count is high. Ensure you are not connected to production database!")
+        }
+    */
     // Clear previous data
-    await prisma.subtask.deleteMany({});
-    await prisma.todo.deleteMany({});
-    await prisma.user.deleteMany({});
+    /**
+     * I commented below cause the seed error was pointing to them...
+     */
+    /**
+            await prisma.subtask.deleteMany({});
+            await prisma.todo.deleteMany({});
+            await prisma.user.deleteMany({});
+    */
+
+/**
+        await prisma.$transaction([
+            prisma.$executeRaw`TRUNCATE "subtask" CASCADE`,
+            prisma.$executeRaw`TRUNCATE "todo" CASCADE`,
+            prisma.$executeRaw`TRUNCATE "user" CASCADE`,
+        ])
+*/
+
 
     // Now insert fresh data
     for (let i = 1; i <= 100; i++) {
@@ -109,7 +135,7 @@ async function main() {
                 id: `U${i.toString().padStart(3, "0")}`,
                 name: faker.person.firstName(),
                 email: faker.internet.email(),
-                password: faker.internet.password(8),
+                password: faker.internet.password({ length: 8 }),
                 todos: {
                     create: taskBank[role].slice(0, 5).flatMap((title) => [
                         {
@@ -145,3 +171,10 @@ async function main() {
     }
 
 }
+
+main().catch(async (e: unknown) => {
+    console.error("[ Error appeared ]:", e);
+    process.exit(1);
+}).finally(async () => {
+    await prisma.$disconnect();
+});

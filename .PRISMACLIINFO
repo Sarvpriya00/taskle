@@ -1,0 +1,37 @@
+if make any changes to schema
+
+```
+npx prisma generate
+```
+
+---
+
+then migrate // sometimes may need to delete the generated files which the path is written in generator client{ output = "pat"}
+in schema.prisma
+
+and may need 
+
+```
+npx prisma migrate reset
+```
+data will be lost and it will ask you if you are sure to fully run the command
+
+```
+npx prisma migrate dev --name init
+```
+
+---
+
+then
+
+```
+ npx prisma db seed
+```
+
+---
+
+then
+
+```
+npx prisma studio
+```
