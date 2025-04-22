@@ -83,9 +83,6 @@ Prisma.NullTypes = {
  * Enums
  */
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
-  ReadUncommitted: 'ReadUncommitted',
-  ReadCommitted: 'ReadCommitted',
-  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 });
 
@@ -123,23 +120,6 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 
-exports.Prisma.UserOrderByRelevanceFieldEnum = {
-  id: 'id',
-  email: 'email',
-  name: 'name',
-  password: 'password'
-};
-
-exports.Prisma.TodoOrderByRelevanceFieldEnum = {
-  title: 'title',
-  category: 'category',
-  userId: 'userId'
-};
-
-exports.Prisma.SubtaskOrderByRelevanceFieldEnum = {
-  title: 'title'
-};
-
 
 exports.Prisma.ModelName = {
   User: 'User',
@@ -157,7 +137,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "E:\\Amity\\Classmate\\Adarsh\\simplePresetTSX\\taskle\\prisma\\output",
+      "value": "/Users/sarvpriyaadarsh/Desktop/code/Personal/taskle/prisma/output",
       "fromEnvVar": null
     },
     "config": {
@@ -166,12 +146,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "windows",
+        "value": "darwin-arm64",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "E:\\Amity\\Classmate\\Adarsh\\simplePresetTSX\\taskle\\prisma\\schema.prisma",
+    "sourceFilePath": "/Users/sarvpriyaadarsh/Desktop/code/Personal/taskle/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -184,17 +164,17 @@ const config = {
   "datasourceNames": [
     "db"
   ],
-  "activeProvider": "mysql",
+  "activeProvider": "sqlite",
   "inlineDatasources": {
     "db": {
       "url": {
-        "fromEnvVar": "DATABASE_URL",
-        "value": "mysql://root:1234@localhost:3306/taskle?schema=public"
+        "fromEnvVar": null,
+        "value": "file:./dev.db"
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"./output/\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id       String  @id @default(cuid())\n  email    String  @unique\n  name     String?\n  password String\n  todos    Todo[]\n}\n\nmodel Todo {\n  id        Int       @id @default(autoincrement())\n  title     String\n  completed Boolean   @default(false)\n  dueDate   DateTime?\n  category  String?\n  userId    String\n  createdAt DateTime  @default(now())\n  subtasks  Subtask[]\n  user      User      @relation(fields: [userId], references: [id])\n}\n\nmodel Subtask {\n  id     Int     @id @default(autoincrement())\n  title  String\n  done   Boolean @default(false)\n  todoId Int\n  todo   Todo    @relation(fields: [todoId], references: [id])\n}\n",
-  "inlineSchemaHash": "446406135fdf594eaea1c046dae3bae7f166b36c75080ea87d9a1e61f4e2f324",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"./output/\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = \"file:./dev.db\"\n}\n\n/**\n * datasource db {\n * provider = \"mysql\"\n * url      = env(\"DATABASE_URL\")\n * }\n */\n\nmodel User {\n  id       String  @id @default(cuid())\n  email    String  @unique\n  name     String?\n  password String\n  todos    Todo[]\n}\n\nmodel Todo {\n  id        Int       @id @default(autoincrement())\n  title     String\n  completed Boolean   @default(false)\n  dueDate   DateTime?\n  category  String?\n  userId    String\n  createdAt DateTime  @default(now())\n  subtasks  Subtask[]\n  user      User      @relation(fields: [userId], references: [id])\n}\n\nmodel Subtask {\n  id     Int     @id @default(autoincrement())\n  title  String\n  done   Boolean @default(false)\n  todoId Int\n  todo   Todo    @relation(fields: [todoId], references: [id])\n}\n",
+  "inlineSchemaHash": "4561e5a39bcdcf3b60c451a787873ee1374748097954b3c6b8c1c1a6a9c429a7",
   "copyEngine": true
 }
 config.dirname = '/'
@@ -205,9 +185,7 @@ config.engineWasm = undefined
 config.compilerWasm = undefined
 
 config.injectableEdgeEnv = () => ({
-  parsed: {
-    DATABASE_URL: typeof globalThis !== 'undefined' && globalThis['DATABASE_URL'] || typeof process !== 'undefined' && process.env && process.env.DATABASE_URL || undefined
-  }
+  parsed: {}
 })
 
 if (typeof globalThis !== 'undefined' && globalThis['DEBUG'] || typeof process !== 'undefined' && process.env && process.env.DEBUG || undefined) {

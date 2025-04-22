@@ -6,16 +6,14 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "./output/"
 }
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./dev.db"
+  url      = "file:./dev.db" // Local development database
 }
 
 /**
-  
   datasource db {
     provider = "mysql"
     url      = env("DATABASE_URL")

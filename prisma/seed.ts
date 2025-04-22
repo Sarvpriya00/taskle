@@ -1,4 +1,4 @@
-import { PrismaClient } from "./output";
+import { PrismaClient } from "@prisma/client";
 import { faker } from "@faker-js/faker";
 
 const prisma = new PrismaClient();
@@ -109,23 +109,9 @@ async function main() {
         }
     */
     // Clear previous data
-    /**
-     * I commented below cause the seed error was pointing to them...
-     */
-    /**
-            await prisma.subtask.deleteMany({});
-            await prisma.todo.deleteMany({});
-            await prisma.user.deleteMany({});
-    */
-
-/**
-        await prisma.$transaction([
-            prisma.$executeRaw`TRUNCATE "subtask" CASCADE`,
-            prisma.$executeRaw`TRUNCATE "todo" CASCADE`,
-            prisma.$executeRaw`TRUNCATE "user" CASCADE`,
-        ])
-*/
-
+    await prisma.subtask.deleteMany({});
+    await prisma.todo.deleteMany({});
+    await prisma.user.deleteMany({});
 
     // Now insert fresh data
     for (let i = 1; i <= 100; i++) {
@@ -133,16 +119,16 @@ async function main() {
         const user = await prisma.user.create({
             data: {
                 id: `U${i.toString().padStart(3, "0")}`,
-                name: faker.person.firstName(),
-                email: faker.internet.email(),
-                password: faker.internet.password({ length: 8 }),
+                name: `User${i}`,
+                email: `user${i}@taskle.io`,
+                password: `user${i}pass`,
                 todos: {
                     create: taskBank[role].slice(0, 5).flatMap((title) => [
                         {
                             title,
                             completed: Math.random() < 0.4,
                             dueDate: getRandomDate(),
-                            category: role,
+                            category: getRandomElement(["Project1", "Project2", "Work", "Personal", "Other"]),
                             subtasks: {
                                 create: [
                                     { title: `Discuss ${title}`, done: Math.random() < 0.5 },
@@ -154,7 +140,7 @@ async function main() {
                             title: `${title} - follow up`,
                             completed: Math.random() < 0.4,
                             dueDate: getRandomDate(),
-                            category: role,
+                            category: getRandomElement(["Project1", "Project2", "Work", "Personal", "Other"]),
                             subtasks: {
                                 create: [
                                     { title: `Review notes on ${title}`, done: Math.random() < 0.5 },

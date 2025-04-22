@@ -680,6 +680,10 @@ export namespace Prisma {
             args: Prisma.UserCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.UserCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
+          }
           delete: {
             args: Prisma.UserDeleteArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$UserPayload>
@@ -695,6 +699,10 @@ export namespace Prisma {
           updateMany: {
             args: Prisma.UserUpdateManyArgs<ExtArgs>
             result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UserUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
           }
           upsert: {
             args: Prisma.UserUpsertArgs<ExtArgs>
@@ -746,6 +754,10 @@ export namespace Prisma {
             args: Prisma.TodoCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.TodoCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TodoPayload>[]
+          }
           delete: {
             args: Prisma.TodoDeleteArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$TodoPayload>
@@ -761,6 +773,10 @@ export namespace Prisma {
           updateMany: {
             args: Prisma.TodoUpdateManyArgs<ExtArgs>
             result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TodoUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TodoPayload>[]
           }
           upsert: {
             args: Prisma.TodoUpsertArgs<ExtArgs>
@@ -812,6 +828,10 @@ export namespace Prisma {
             args: Prisma.SubtaskCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.SubtaskCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubtaskPayload>[]
+          }
           delete: {
             args: Prisma.SubtaskDeleteArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$SubtaskPayload>
@@ -827,6 +847,10 @@ export namespace Prisma {
           updateMany: {
             args: Prisma.SubtaskUpdateManyArgs<ExtArgs>
             result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SubtaskUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubtaskPayload>[]
           }
           upsert: {
             args: Prisma.SubtaskUpsertArgs<ExtArgs>
@@ -1248,7 +1272,19 @@ export namespace Prisma {
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
+  export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    name?: boolean
+    password?: boolean
+  }, ExtArgs["result"]["user"]>
 
+  export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    name?: boolean
+    password?: boolean
+  }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
     id?: boolean
@@ -1262,6 +1298,8 @@ export namespace Prisma {
     todos?: boolean | User$todosArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
+  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
@@ -1391,6 +1429,30 @@ export namespace Prisma {
     createMany<T extends UserCreateManyArgs>(args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
+     * Create many Users and returns the data saved in the database.
+     * @param {UserCreateManyAndReturnArgs} args - Arguments to create many Users.
+     * @example
+     * // Create many Users
+     * const user = await prisma.user.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Users and only return the `id`
+     * const userWithIdOnly = await prisma.user.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserCreateManyAndReturnArgs>(args?: SelectSubset<T, UserCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
      * Delete a User.
      * @param {UserDeleteArgs} args - Arguments to delete one User.
      * @example
@@ -1453,6 +1515,36 @@ export namespace Prisma {
      * 
      */
     updateMany<T extends UserUpdateManyArgs>(args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Users and returns the data updated in the database.
+     * @param {UserUpdateManyAndReturnArgs} args - Arguments to update many Users.
+     * @example
+     * // Update many Users
+     * const user = await prisma.user.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Users and only return the `id`
+     * const userWithIdOnly = await prisma.user.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UserUpdateManyAndReturnArgs>(args: SelectSubset<T, UserUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one User.
@@ -1876,7 +1968,24 @@ export namespace Prisma {
      * The data used to create many Users.
      */
     data: UserCreateManyInput | UserCreateManyInput[]
-    skipDuplicates?: boolean
+  }
+
+  /**
+   * User createManyAndReturn
+   */
+  export type UserCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * The data used to create many Users.
+     */
+    data: UserCreateManyInput | UserCreateManyInput[]
   }
 
   /**
@@ -1909,6 +2018,32 @@ export namespace Prisma {
    * User updateMany
    */
   export type UserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Users.
+     */
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
+    /**
+     * Filter which Users to update
+     */
+    where?: UserWhereInput
+    /**
+     * Limit how many Users to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * User updateManyAndReturn
+   */
+  export type UserUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
     /**
      * The data used to update Users.
      */
@@ -2251,7 +2386,27 @@ export namespace Prisma {
     _count?: boolean | TodoCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["todo"]>
 
+  export type TodoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    completed?: boolean
+    dueDate?: boolean
+    category?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["todo"]>
 
+  export type TodoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    completed?: boolean
+    dueDate?: boolean
+    category?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["todo"]>
 
   export type TodoSelectScalar = {
     id?: boolean
@@ -2268,6 +2423,12 @@ export namespace Prisma {
     subtasks?: boolean | Todo$subtasksArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | TodoCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type TodoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type TodoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $TodoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2402,6 +2563,30 @@ export namespace Prisma {
     createMany<T extends TodoCreateManyArgs>(args?: SelectSubset<T, TodoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
+     * Create many Todos and returns the data saved in the database.
+     * @param {TodoCreateManyAndReturnArgs} args - Arguments to create many Todos.
+     * @example
+     * // Create many Todos
+     * const todo = await prisma.todo.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Todos and only return the `id`
+     * const todoWithIdOnly = await prisma.todo.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TodoCreateManyAndReturnArgs>(args?: SelectSubset<T, TodoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TodoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
      * Delete a Todo.
      * @param {TodoDeleteArgs} args - Arguments to delete one Todo.
      * @example
@@ -2464,6 +2649,36 @@ export namespace Prisma {
      * 
      */
     updateMany<T extends TodoUpdateManyArgs>(args: SelectSubset<T, TodoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Todos and returns the data updated in the database.
+     * @param {TodoUpdateManyAndReturnArgs} args - Arguments to update many Todos.
+     * @example
+     * // Update many Todos
+     * const todo = await prisma.todo.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Todos and only return the `id`
+     * const todoWithIdOnly = await prisma.todo.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TodoUpdateManyAndReturnArgs>(args: SelectSubset<T, TodoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TodoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Todo.
@@ -2891,7 +3106,28 @@ export namespace Prisma {
      * The data used to create many Todos.
      */
     data: TodoCreateManyInput | TodoCreateManyInput[]
-    skipDuplicates?: boolean
+  }
+
+  /**
+   * Todo createManyAndReturn
+   */
+  export type TodoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Todo
+     */
+    select?: TodoSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Todo
+     */
+    omit?: TodoOmit<ExtArgs> | null
+    /**
+     * The data used to create many Todos.
+     */
+    data: TodoCreateManyInput | TodoCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TodoIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -2936,6 +3172,36 @@ export namespace Prisma {
      * Limit how many Todos to update.
      */
     limit?: number
+  }
+
+  /**
+   * Todo updateManyAndReturn
+   */
+  export type TodoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Todo
+     */
+    select?: TodoSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Todo
+     */
+    omit?: TodoOmit<ExtArgs> | null
+    /**
+     * The data used to update Todos.
+     */
+    data: XOR<TodoUpdateManyMutationInput, TodoUncheckedUpdateManyInput>
+    /**
+     * Filter which Todos to update
+     */
+    where?: TodoWhereInput
+    /**
+     * Limit how many Todos to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TodoIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -3244,7 +3510,21 @@ export namespace Prisma {
     todo?: boolean | TodoDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["subtask"]>
 
+  export type SubtaskSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    done?: boolean
+    todoId?: boolean
+    todo?: boolean | TodoDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["subtask"]>
 
+  export type SubtaskSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    done?: boolean
+    todoId?: boolean
+    todo?: boolean | TodoDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["subtask"]>
 
   export type SubtaskSelectScalar = {
     id?: boolean
@@ -3255,6 +3535,12 @@ export namespace Prisma {
 
   export type SubtaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "done" | "todoId", ExtArgs["result"]["subtask"]>
   export type SubtaskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    todo?: boolean | TodoDefaultArgs<ExtArgs>
+  }
+  export type SubtaskIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    todo?: boolean | TodoDefaultArgs<ExtArgs>
+  }
+  export type SubtaskIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     todo?: boolean | TodoDefaultArgs<ExtArgs>
   }
 
@@ -3386,6 +3672,30 @@ export namespace Prisma {
     createMany<T extends SubtaskCreateManyArgs>(args?: SelectSubset<T, SubtaskCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
+     * Create many Subtasks and returns the data saved in the database.
+     * @param {SubtaskCreateManyAndReturnArgs} args - Arguments to create many Subtasks.
+     * @example
+     * // Create many Subtasks
+     * const subtask = await prisma.subtask.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Subtasks and only return the `id`
+     * const subtaskWithIdOnly = await prisma.subtask.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SubtaskCreateManyAndReturnArgs>(args?: SelectSubset<T, SubtaskCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubtaskPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
      * Delete a Subtask.
      * @param {SubtaskDeleteArgs} args - Arguments to delete one Subtask.
      * @example
@@ -3448,6 +3758,36 @@ export namespace Prisma {
      * 
      */
     updateMany<T extends SubtaskUpdateManyArgs>(args: SelectSubset<T, SubtaskUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Subtasks and returns the data updated in the database.
+     * @param {SubtaskUpdateManyAndReturnArgs} args - Arguments to update many Subtasks.
+     * @example
+     * // Update many Subtasks
+     * const subtask = await prisma.subtask.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Subtasks and only return the `id`
+     * const subtaskWithIdOnly = await prisma.subtask.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SubtaskUpdateManyAndReturnArgs>(args: SelectSubset<T, SubtaskUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubtaskPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Subtask.
@@ -3871,7 +4211,28 @@ export namespace Prisma {
      * The data used to create many Subtasks.
      */
     data: SubtaskCreateManyInput | SubtaskCreateManyInput[]
-    skipDuplicates?: boolean
+  }
+
+  /**
+   * Subtask createManyAndReturn
+   */
+  export type SubtaskCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subtask
+     */
+    select?: SubtaskSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subtask
+     */
+    omit?: SubtaskOmit<ExtArgs> | null
+    /**
+     * The data used to create many Subtasks.
+     */
+    data: SubtaskCreateManyInput | SubtaskCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubtaskIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -3916,6 +4277,36 @@ export namespace Prisma {
      * Limit how many Subtasks to update.
      */
     limit?: number
+  }
+
+  /**
+   * Subtask updateManyAndReturn
+   */
+  export type SubtaskUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subtask
+     */
+    select?: SubtaskSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subtask
+     */
+    omit?: SubtaskOmit<ExtArgs> | null
+    /**
+     * The data used to update Subtasks.
+     */
+    data: XOR<SubtaskUpdateManyMutationInput, SubtaskUncheckedUpdateManyInput>
+    /**
+     * Filter which Subtasks to update
+     */
+    where?: SubtaskWhereInput
+    /**
+     * Limit how many Subtasks to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubtaskIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -4008,9 +4399,6 @@ export namespace Prisma {
    */
 
   export const TransactionIsolationLevel: {
-    ReadUncommitted: 'ReadUncommitted',
-    ReadCommitted: 'ReadCommitted',
-    RepeatableRead: 'RepeatableRead',
     Serializable: 'Serializable'
   };
 
@@ -4064,32 +4452,6 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
-  export const UserOrderByRelevanceFieldEnum: {
-    id: 'id',
-    email: 'email',
-    name: 'name',
-    password: 'password'
-  };
-
-  export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
-
-
-  export const TodoOrderByRelevanceFieldEnum: {
-    title: 'title',
-    category: 'category',
-    userId: 'userId'
-  };
-
-  export type TodoOrderByRelevanceFieldEnum = (typeof TodoOrderByRelevanceFieldEnum)[keyof typeof TodoOrderByRelevanceFieldEnum]
-
-
-  export const SubtaskOrderByRelevanceFieldEnum: {
-    title: 'title'
-  };
-
-  export type SubtaskOrderByRelevanceFieldEnum = (typeof SubtaskOrderByRelevanceFieldEnum)[keyof typeof SubtaskOrderByRelevanceFieldEnum]
 
 
   /**
@@ -4152,7 +4514,6 @@ export namespace Prisma {
     name?: SortOrderInput | SortOrder
     password?: SortOrder
     todos?: TodoOrderByRelationAggregateInput
-    _relevance?: UserOrderByRelevanceInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -4211,7 +4572,6 @@ export namespace Prisma {
     createdAt?: SortOrder
     subtasks?: SubtaskOrderByRelationAggregateInput
     user?: UserOrderByWithRelationInput
-    _relevance?: TodoOrderByRelevanceInput
   }
 
   export type TodoWhereUniqueInput = Prisma.AtLeast<{
@@ -4274,7 +4634,6 @@ export namespace Prisma {
     done?: SortOrder
     todoId?: SortOrder
     todo?: TodoOrderByWithRelationInput
-    _relevance?: SubtaskOrderByRelevanceInput
   }
 
   export type SubtaskWhereUniqueInput = Prisma.AtLeast<{
@@ -4489,7 +4848,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
@@ -4504,7 +4862,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
@@ -4521,12 +4878,6 @@ export namespace Prisma {
 
   export type TodoOrderByRelationAggregateInput = {
     _count?: SortOrder
-  }
-
-  export type UserOrderByRelevanceInput = {
-    fields: UserOrderByRelevanceFieldEnum | UserOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type UserCountOrderByAggregateInput = {
@@ -4561,7 +4912,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
@@ -4579,7 +4929,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
@@ -4637,12 +4986,6 @@ export namespace Prisma {
 
   export type SubtaskOrderByRelationAggregateInput = {
     _count?: SortOrder
-  }
-
-  export type TodoOrderByRelevanceInput = {
-    fields: TodoOrderByRelevanceFieldEnum | TodoOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type TodoCountOrderByAggregateInput = {
@@ -4738,12 +5081,6 @@ export namespace Prisma {
   export type TodoScalarRelationFilter = {
     is?: TodoWhereInput
     isNot?: TodoWhereInput
-  }
-
-  export type SubtaskOrderByRelevanceInput = {
-    fields: SubtaskOrderByRelevanceFieldEnum | SubtaskOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type SubtaskCountOrderByAggregateInput = {
@@ -4928,7 +5265,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
@@ -4943,7 +5279,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
@@ -4958,7 +5293,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
@@ -4987,7 +5321,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
@@ -5121,7 +5454,6 @@ export namespace Prisma {
 
   export type TodoCreateManyUserInputEnvelope = {
     data: TodoCreateManyUserInput | TodoCreateManyUserInput[]
-    skipDuplicates?: boolean
   }
 
   export type TodoUpsertWithWhereUniqueWithoutUserInput = {
@@ -5171,7 +5503,6 @@ export namespace Prisma {
 
   export type SubtaskCreateManyTodoInputEnvelope = {
     data: SubtaskCreateManyTodoInput | SubtaskCreateManyTodoInput[]
-    skipDuplicates?: boolean
   }
 
   export type UserCreateWithoutTodosInput = {
