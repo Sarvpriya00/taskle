@@ -1,16 +1,20 @@
 const { PrismaClient } = require("@prisma/client");
+const { faker } = require("@faker-js/faker");
 
 const prisma = new PrismaClient();
 
-const users = [
-    { id: "U1", name: "Alice", email: "alice@taskle.io", password: "alice123", role: "Product Manager" },
-    { id: "U2", name: "Bob", email: "bob@taskle.io", password: "bob123", role: "Frontend Developer" },
-    { id: "U3", name: "Carol", email: "carol@taskle.io", password: "carol123", role: "Backend Developer" },
-    { id: "U4", name: "David", email: "david@taskle.io", password: "david123", role: "UI/UX Designer" },
-    { id: "U5", name: "Eve", email: "eve@taskle.io", password: "eve123", role: "QA Engineer" },
-];
+const roleList = [
+    "Product Manager",
+    "Frontend Developer",
+    "Backend Developer",
+    "UI/UX Designer",
+    "QA Engineer",
+] as const;
 
-type Role = "Product Manager" | "Frontend Developer" | "Backend Developer" | "UI/UX Designer" | "QA Engineer";
+type Role = (typeof roleList)[number];
+
+const roles: Role[] = [...roleList];
+
 const taskBank: Record<Role, string[]> = {
     "Product Manager": [
         "Finalize MVP scope",
@@ -51,7 +55,7 @@ const taskBank: Record<Role, string[]> = {
     "UI/UX Designer": [
         "Design mobile layout",
         "Create onboarding flow mockups",
-        "Define color and typography styles",
+        "Define colour and typography styles",
         "Prototype user dashboard",
         "Review user journey map",
         "Conduct design audit",
@@ -74,10 +78,23 @@ const taskBank: Record<Role, string[]> = {
     ],
 };
 
+const users = [
+    { id: "U1", name: "Alice", email: "alice@taskle.io", password: "alice123", role: "Product Manager" },
+    { id: "U2", name: "Bob", email: "bob@taskle.io", password: "bob123", role: "Frontend Developer" },
+    { id: "U3", name: "Carol", email: "carol@taskle.io", password: "carol123", role: "Backend Developer" },
+    { id: "U4", name: "David", email: "david@taskle.io", password: "david123", role: "UI/UX Designer" },
+    { id: "U5", name: "Eve", email: "eve@taskle.io", password: "eve123", role: "QA Engineer" },
+];
+
 function getRandomDate() {
     const now = new Date();
     return new Date(now.getTime() + Math.floor(Math.random() * 14) * 86400000);
 }
+
+function getRandomElement<T>(arr: T[]): T {
+    return arr[Math.floor(Math.random() * arr.length)];
+}
+
 async function main() {
     // Clear previous data
     await prisma.subtask.deleteMany({});
@@ -85,20 +102,21 @@ async function main() {
     await prisma.user.deleteMany({});
 
     // Now insert fresh data
-    for (const user of users) {
-        const createdUser = await prisma.user.create({
+    for (let i = 1; i <= 100; i++) {
+        const role = getRandomElement(roles);
+        const user = await prisma.user.create({
             data: {
-                id: user.id,
-                email: user.email,
-                name: user.name,
-                password: user.password,
+                id: `U${i.toString().padStart(3, "0")}`,
+                name: faker.person.firstName(),
+                email: faker.internet.email(),
+                password: faker.internet.password(8),
                 todos: {
-                    create: taskBank[user.role as Role].flatMap((title: string, i: number) => [
+                    create: taskBank[role].slice(0, 5).flatMap((title) => [
                         {
                             title,
                             completed: Math.random() < 0.4,
                             dueDate: getRandomDate(),
-                            category: user.role,
+                            category: role,
                             subtasks: {
                                 create: [
                                     { title: `Discuss ${title}`, done: Math.random() < 0.5 },
@@ -110,7 +128,7 @@ async function main() {
                             title: `${title} - follow up`,
                             completed: Math.random() < 0.4,
                             dueDate: getRandomDate(),
-                            category: user.role,
+                            category: role,
                             subtasks: {
                                 create: [
                                     { title: `Review notes on ${title}`, done: Math.random() < 0.5 },
@@ -123,6 +141,7 @@ async function main() {
             },
         });
 
-        console.log(`✅ Seeded user: ${createdUser.email}`);
+        console.log(`🌱 Seeded user ${i}: ${user.email} (${role})`);
     }
+
 }
