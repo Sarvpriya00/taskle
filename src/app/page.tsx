@@ -1,103 +1,95 @@
-import Image from "next/image";
+
+
+'use client';
+
+import { Cpu, Zap } from 'lucide-react'
+import { Settings2, Sparkles } from 'lucide-react'
+import type { ReactNode } from 'react'
+import { Card, CardHeader, CardContent } from '@/components/ui/card'
+import Image from 'next/image'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
+import GetStartedButton from '@/components/GetStartedButton'
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <>
+      <section className="py-16 md:py-32">
+        <div className="mx-auto max-w-5xl space-y-8 px-6 md:space-y-16">
+          <h2 className="relative z-10 max-w-xl text-4xl font-medium lg:text-5xl">Taskle – Your Ultimate Task Management Companion</h2>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          <div className="grid gap-6 sm:grid-cols-2 md:gap-12 lg:gap-24">
+            <div className="relative space-y-4">
+              <p className="text-muted-foreground">
+                Taskle is a <span className="text-accent-foreground font-bold">powerful, full-stack task management web app</span> designed to help you stay on top of your projects with ease.
+              </p>
+              <p className="text-muted-foreground">
+                Whether you're managing work tasks, personal projects, or anything in between, Taskle organizes your life and boosts productivity with smart features like task categorization, completion tracking, and insightful data visualizations.
+              </p>
+            </div>
+            <div className="relative mt-6 sm:mt-0">
+              <div className="bg-linear-to-b aspect-67/34 relative rounded-2xl from-zinc-300 to-transparent p-px dark:from-zinc-700">
+                <Image src="https://i.pinimg.com/736x/d1/81/b5/d181b57ed0404f6fd1ef32a61f0a06e8.jpg" className="hidden rounded-[15px] dark:block" alt="payments illustration dark" width={1206} height={612} />
+                <Image src="https://i.pinimg.com/736x/d1/81/b5/d181b57ed0404f6fd1ef32a61f0a06e8.jpg" className="rounded-[15px] shadow dark:hidden" alt="payments illustration light" width={1206} height={612} />
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+      </section>
+      
+      <section className="bg-zinc-50 py-16 md:py-32 dark:bg-transparent">
+        <div className="@container mx-auto max-w-5xl px-6">
+          <div className="text-center">
+            <h2 className="text-balance text-4xl font-semibold lg:text-5xl">Key Features</h2>
+            <p className="mt-4">Powerful tools to help you organize, track, and complete your tasks efficiently.</p>
+          </div>
+          <div className="@min-4xl:max-w-full @min-4xl:grid-cols-3 mx-auto mt-8 grid max-w-sm gap-6 *:text-center md:mt-16">
+            <Card className="group shadow-zinc-950/5">
+              <CardHeader className="pb-3">
+                <CardDecorator>
+                  <Zap className="size-6" aria-hidden />
+                </CardDecorator>
+                <h3 className="mt-6 font-medium">Seamless Organization</h3>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm">Effortless task organization with customizable categories like Work, Personal, and Projects.</p>
+              </CardContent>
+            </Card>
+
+            <Card className="group shadow-zinc-950/5">
+              <CardHeader className="pb-3">
+                <CardDecorator>
+                  <Settings2 className="size-6" aria-hidden />
+                </CardDecorator>
+                <h3 className="mt-6 font-medium">Real-time Tracking</h3>
+              </CardHeader>
+              <CardContent>
+                <p className="mt-3 text-sm">Track your progress with completion vs. remaining charts and intuitive calendar UI for managing due dates.</p>
+              </CardContent>
+            </Card>
+
+            <Card className="group shadow-zinc-950/5">
+              <CardHeader className="pb-3">
+                <CardDecorator>
+                  <Sparkles className="size-6" aria-hidden />
+                </CardDecorator>
+                <h3 className="mt-6 font-medium">Data Analytics</h3>
+              </CardHeader>
+              <CardContent>
+                <p className="mt-3 text-sm">Interactive bar charts and visualizations give you deep insights into your task management habits.</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+    </>
+  )
 }
+
+const CardDecorator = ({ children }: { children: ReactNode }) => (
+  <div className="relative mx-auto size-36 duration-200 [--color-border:color-mix(in_oklab,var(--color-zinc-950)10%,transparent)] group-hover:[--color-border:color-mix(in_oklab,var(--color-zinc-950)20%,transparent)] dark:[--color-border:color-mix(in_oklab,var(--color-white)15%,transparent)] dark:group-hover:bg-white/5 dark:group-hover:[--color-border:color-mix(in_oklab,var(--color-white)20%,transparent)]">
+    <div aria-hidden className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] bg-[size:24px_24px]" />
+    <div aria-hidden className="bg-radial to-background absolute inset-0 from-transparent to-75%" />
+    <div className="bg-background absolute inset-0 m-auto flex size-12 items-center justify-center border-l border-t">{children}</div>
+  </div>
+)
