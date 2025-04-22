@@ -88,8 +88,9 @@ const users = [
 ];
 
 function getRandomDate() {
-    const now = new Date();
-    return new Date(now.getTime() + Math.floor(Math.random() * 14) * 86400000);
+    const start = new Date("2025-04-22").getTime();
+    const daysAhead = Math.floor(Math.random() * 14); // up to 2 weeks into the future
+    return new Date(start + daysAhead * 86400000);
 }
 
 function getRandomElement<T>(arr: T[]): T {

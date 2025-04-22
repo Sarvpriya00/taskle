@@ -31,7 +31,7 @@ export default function LoginPage() {
     return (
         <div className="min-h-screen flex items-center justify-center bg-background">
             <Card className="p-8 rounded-2xl shadow-xl w-full max-w-sm text-center space-y-6">
-                <h1 className="text-2xl font-semibold">Sign in to SmartTodo</h1>
+                <h1 className="text-2xl font-semibold">Sign in to Taskle</h1>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
                         <Input
